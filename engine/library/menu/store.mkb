@@ -1,0 +1,16 @@
+<?php
+
+include ('buttons/rc.btn');
+include ('buttons/loc.btn');
+include ('buttons/store.btn');
+
+$mMKb = [[$CCGBtn]];
+$vitMKb = [[$SAaBtn]];
+$secMKb = [[$RBtkBtn,$RCntBtn],[$RTcrBtn,$RRwkBtn]];
+$wMKb = [[$WEnOsBtn],[$WEnLoBtn]];
+$payMKb = [[$ltcBtn,$btcBtn],[$maibBtn]];
+$payKb = [[$payBtn]];
+
+$MKb = [['МЕНЮ'],[$xchBtn,$rulBtn]];
+
+?>

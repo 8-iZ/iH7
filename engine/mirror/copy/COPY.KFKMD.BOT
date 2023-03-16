@@ -1,0 +1,238 @@
+<?php
+
+list($ltc_adress,$btc_adress,$card_number,$balance)=explode('&',$settings);
+
+$mMF[] = array('Главное меню');
+$KISH = array ("text" => "Кишинев", "callback_data" => "STP2KS");
+$CTR = array ("text" => "Центр", "callback_data" => 'NXT'.$d);
+$BTK = array ("text" => "Ботаника", "callback_data" => 'NXT'.$d);
+$RSK = array ("text" => "Рышкановка", "callback_data" => 'NXT'.$d);
+$BKN = array ("text" => "Буюканы", "callback_data" => 'NXT'.$d);
+$CKN = array ("text" => "Чеканы", "callback_data" => 'NXT'.$d);
+$STP = array ("text" => "Старая почта", "callback_data" => 'NXT'.$d);
+$KDR = array ("text" => "Кодры", "callback_data" => 'NXT'.$d);
+$DRL = array ("text" => "Дурлешты", "callback_data" => 'NXT'.$d);
+$BLTS = array ("text" => "Бельцы", "callback_data" => "STP2RG");
+$KGL = array ("text" => "Кагул", "callback_data" => "STP2RG");
+$ORG = array ("text" => "Оргеев", "callback_data" => "STP2RG");
+$KAL = array ("text" => "Калараш", "callback_data" => "STP2RG");
+$STR = array ("text" => "Страшены", "callback_data" => "STP2RG");
+$YLO = array ("text" => "Яловень", "callback_data" => "STP2RG");
+$FLO = array ("text" => "Флорешты", "callback_data" => "STP2RG");
+$EDN = array ("text" => "Единец", "callback_data" => "STP2RG");
+$NAN = array ("text" => "Новые Анены", "callback_data" => "STP2RG");
+$FAL = array ("text" => "Фалешты", "callback_data" => "STP2RG");
+$KOS = array ("text" => "Костешты", "callback_data" => "STP2RG");
+$SYN = array ("text" => "Сынджереи", "callback_data" => "STP2RG");
+$SRK = array ("text" => "Сороки", "callback_data" => "STP2RG");
+$KOM = array ("text" => "Комрат", "callback_data" => "STP2RG");
+$UNG = array ("text" => "Унгены", "callback_data" => "STP2RG");
+$DRO = array ("text" => "Дрокия", "callback_data" => "STP2RG");
+$SAT = array ("text" => "Село Костешты", "callback_data" => "STP2RG");
+$BLNC = array ("text" => 'Баланс ('.$balance.' lei)', "callback_data" => "BAL");
+$LAST = array ("text" => "Последнии заказ", "callback_data" => "LST");
+$REG = array ("text" => "по городу", "callback_data" => 'NXT'.$d);
+$PB = array ("text" => "оплатить", "callback_data" => 'PAY'.$d);
+$LTC = array ("text" => "Litecoin", "callback_data" => 'LTC'.$d);
+$BTC = array ("text" => "Bitcoin", "callback_data" => 'BTC'.$d);
+$CARD = array ("text" => "Оплата на Карту💳", "callback_data" => 'CDR'.$d);
+$CB = array ("text" => "отмена", "callback_data" => 'EXT');
+$APVP1 = array ("text" => "💎A-PVP(White)💎 - 1г (510lei)", "callback_data" => "MRCA10");
+$APVP05 = array ("text" => "💎A-PVP(White)💎- 0.5г (310lei)", "callback_data" => "MRCA05");
+$APVP1R = array ("text" => "💎A-PVP(White)💎 - 1г (460lei)", "callback_data" => "REGA10");
+$APVP05R = array ("text" => "💎A-PVP(White)💎 - 0.5г (310lei)", "callback_data" => "REGA05");
+$APVP5 = array ("text" => "💎A-PVP(White)💎 - 5г (2330lei)", "callback_data" => "MRCA50");
+$APVP2 = array ("text" => "💎A-PVP(White)💎 - 2г (925lei)", "callback_data" => "MRCA20");
+$APVP15 = array ("text" => "💎A-PVP(White)💎 - 1.5г (770lei)", "callback_data" => "MRCA15");
+$A1B1 = array ("text" => "💎1г КРБ+🌳1г ШИШКИ(775lei)", "callback_data" => "MRCASB");
+$BWK1 = array ("text" => "🌳1г ШИШКИ(Gorilla,30%ТГК)🌳(330lei)", "callback_data" => "MRCBWK");
+$BWK1R = array ("text" => "🌳1г ШИШКИ(Gorilla,30%ТГК)🌳(330lei)", "callback_data" => "REGBWK");
+$PRC1 = array ("text" => "✨Канал✨", "url" => "https://bit.ly/3UNWYhC");
+$PRC2 = array ("text" => "✨Контакты✨", "url" => "https://tinyurl.com/34jxsjds");
+$PRC4 = array ("text" => "🛑Бот Кишинева🛑", "url" => "https://t.me/kaifarimd_bot");
+$PRC3 = array ("text" => "💎Оператор💎", "url" => "https://t.me/kaifarimd_bot");
+$OPER = array ("text" => "👽Оператор", "url" => "https://t.me/kaifarimd_bot");
+$PRC6 = array ("text" => "💢 Саппорт 💢 ", "url" => "https://t.me/KAYF_sapp");
+$PRC5 = array ("text" => "💠Бот ПМР💠", "url" => "https://t.me/kaifarimd_bot");
+$PRC7 = array ("text" => "💠Чат для игр💠", "url" => "https://tinyurl.com/mr74enfr");
+$TOP = array ("text" => "💰Топ Обмен", "url" => "https://t.me/AgentLtc1");
+$TEH = array ("text" => "🤖Тех.поддержка", "url" => "https://t.me/KAYF_sapp");
+$INFO = array ("text" => "🧠Инфопанель", "url" => "https://bit.ly/3s0PXOM");
+$OBMN = array ("text" => "🤑Обменник", "url" => "https://telegra.ph/OBMENY-KAJFA-12-11");
+$AKTS = array ("text" => "🤗Акция 5+1", "url" => "https://telegra.ph/AKCIYA-51-Kajfarik-10-16");
+$AWR = array ("text" => "Проблема с оплатои?", "callback_data" => "AWR");
+$ADLTC = array ("text" => "См. LTC", "callback_data" => "ADMLTC");
+$ADBTC = array ("text" => "См. BTC", "callback_data" => "ADMBTC");
+$ADCARD = array ("text" => "См. КАРТУ", "callback_data" => "ADMCRD");
+$ADBAL = array ("text" => "начислить баланс", "callback_data" => "ADMBAL");
+$ADSPM = array ("text" => "рассылка", "callback_data" => "SPM");
+$ADPRC = array ("text" => "праис", "callback_data" => "PRC");
+$MF = json_encode(array('resize_keyboard' => true,'one_time_keyboard' => false,'keyboard' => $mMF));
+$ADMEN = json_encode(array("inline_keyboard" => [[$ADLTC,$ADBTC,$ADCARD],[$ADBAL],[$ADSPM,$ADPRC]]));
+$AWR = json_encode(array("inline_keyboard" => [[$AWR]]));
+$RrK = json_encode(array("inline_keyboard" => [[$REG]]));
+$NK = json_encode(array("inline_keyboard" => [[$PB],[$CB]]));
+$PK = json_encode(array("inline_keyboard" => [[$CARD],[$BTC],[$LTC]]));
+$MrK = json_encode(array("inline_keyboard" => [[$CTR],[$BTK],[$RSK],[$BKN],[$CKN],[$STP],[$KDR],[$DRL]]));
+$PRCK = json_encode(array("inline_keyboard" => [[$PRC1],[$PRC2],[$PRC3],[$PRC4],[$PRC5],[$PRC6],[$PRC7]]));
+if($d == '2KS'){$McK = json_encode(array("inline_keyboard" => [[$APVP1],[$APVP05],[$APVP2],[$APVP5],[$BWK1],[$A1B1],[$APVP15]]));}else{$McK = json_encode(array("inline_keyboard" => [[$APVP1R],[$APVP05R],[$BWK1R]]));}
+$MK = json_encode(array("inline_keyboard" => [[$KISH,$BLTS],[$KGL,$ORG],[$KAL,$STR],[$YLO,$FLO],[$EDN,$NAN],[$FAL,$KOS],[$SYN,$SRK],[$KOM,$UNG],[$DRO,$SAT],[$BLNC],[$LAST],[$OPER],[$TOP],[$TEH],[$INFO],[$OBMN],[$AKTS]]));
+
+
+$city_array = ["КИШИНЕВ","БЕЛЬЦЫ","КИШИНЕВ","КОМРАТ","КИШИНЕВ","ОРГЕЕВ","КИШИНЕВ","КАГУЛ","КИШИНЕВ"];$city_rnd = $city_array[array_rand($city_array)];if($city_rnd=="КИШИНЕВ"){  $sector_array = ["ЦЕНТР","БОТАНИКА","БУЮКАНЫ","ЧЕКАНЫ","РЫШКАНОВКА","СТАРАЯ ПОЧТА","СКУЛЯНКА","ЦЕНТР"]; $sector_rnd = 'Р - он : '.$sector_array[array_rand($sector_array)];}else{ $sector_rnd = 'Р - он : по городу';}
+$mrc_array = ["0,5 гр".PHP_EOL."💲  Цена  :  310","1 гр".PHP_EOL."💲  Цена  :  510"];
+$PROMOTXT = '🔝 КАЙФАРИК - ШОП 🔝'.PHP_EOL.PHP_EOL.' 🗞 СВЕЖЕЕ ПОПОЛНЕНИЕ 🗞'.PHP_EOL.PHP_EOL.'🏛 Город :  '.$city_rnd.PHP_EOL.PHP_EOL.'🛒 Товар : Кристалл A - PVP '.PHP_EOL.'                    💎 White 💎'.PHP_EOL.PHP_EOL.'🏃‍♂ '.$sector_rnd.PHP_EOL.'⚖️  Вес     :  '.$mrc_array[array_rand($mrc_array)].' lei 👑 '.PHP_EOL.PHP_EOL.'У нас вы найдете товар высшего качества по приемлемым ценам'.PHP_EOL.' ❖——◈————◈——❖'.PHP_EOL.' 🎁 Ежедневное пополнение и обновление товара! Свежие и надёжные клады!'.PHP_EOL.' ❖——◈————◈——❖'.PHP_EOL.' 💳 Удобные способы покупки и оплаты'.PHP_EOL.' ❖——◈————◈——❖';
+$PROMO5T1 = '•  K A I F A R I K   S H O P  •  '.PHP_EOL.'    ┈┈──╼⊳ 🇦🇩 M O L D O V A 🇦🇩 ⊲╾──┈┈'.PHP_EOL.'      ◌ АКЦИЯ В БОТЕ АВТОПРОДАЖ ◌'.PHP_EOL.'                        ┈┈               ┈┈'.PHP_EOL.'                             5 + 1 '.PHP_EOL.' ┈┈───╼⊳     ⊰  ⊱     ⊲╾───┈┈'.PHP_EOL.' 🛑АКЦИЯ ДЕЙСТВУЕТ ТОЛЬКО НА КРИСТАЛЫ🛑'.PHP_EOL.PHP_EOL.'           • ⚜️ УСЛОВИЯ АКЦИИ ⚜️ • '.PHP_EOL.'        ⋆┈┈｡ﾟ  ❃۪       ❁۪      ❀۪   ﾟ｡┈┈⋆'.PHP_EOL.' •⚜️➣За прошлые недели  заявки не считаются'.PHP_EOL.' •⚜️➣ Акция проходит каждую'.PHP_EOL.'  неделю с понедельника по воскресенье'.PHP_EOL.' •⚜️➣ За этот период вы совершаете  5 покупок в боте одного веса ( 5 по 0,5 / 5 по 1 и тд ) и одного  товара! '.PHP_EOL.PHP_EOL.' 🛑Разный товар не в счет🛑'.PHP_EOL.' •⚜️➣ Все ваши покупки должны  быть с одного аккаунта и '.PHP_EOL.' без заявок на перезаклад!'.PHP_EOL.PHP_EOL.' •⚜️➣ Вы должны сохранить 5 номеров  заказов тот что дает вам бот'.PHP_EOL.' •⚜️➣ Если вы выполнили все условия  тогда пишите оператору продаж и скидываете номера заказов!'.PHP_EOL.' •⚜️➣ Если у вас все верно, то вам  выдают ваш шестой клад'.PHP_EOL.' •❗️➣ Приз выдается один раз в  неделю, с 11:00 до 21:00!'.PHP_EOL.'       '.PHP_EOL.' •  K A I F A R I K  S H O P  •';
+            
+            $orddb = mysqli_query($q,"SELECT * FROM orders WHERE bot = '$botID' AND id = (SELECT max(id) FROM orders WHERE bot = '$botID')");
+            $ord = mysqli_fetch_assoc($orddb); $order = $ord['id'] +1;
+            
+		    switch($d){
+		        case 'A10': $txt =  '510'; break;
+		        case 'A05': $txt =  '310'; break;
+		        case 'A50': $txt =  '2330'; break;
+		        case 'A20': $txt =  '925'; break;
+		        case 'A15': $txt =  '770'; break;
+		        case 'BWK': $txt =  '330'; break;
+		        case 'ASB': $txt =  '775'; break;
+		        } $txt = $txt - $balance;
+            
+	switch($m){
+	    case 'ADMIN': case 'ADM':
+	        switch($d){
+	            case 'LTC': sMsg($C,'Пришли новыи счет LTC:',$MF);mysqli_query($q, "UPDATE users SET temp = '$data' WHERE id = '$C'");break;
+	            case 'BTC': sMsg($C,'Пришли новыи счет BTC:',$MF);mysqli_query($q, "UPDATE users SET temp = '$data' WHERE id = '$C'");break;
+	            case 'CRD': sMsg($C,'Пришли новую КАРТУ:',$MF);mysqli_query($q, "UPDATE users SET temp = '$data' WHERE id = '$C'");break;
+	            case 'BAL': sMsg($C,'Сколько плюсанем?',$MF);mysqli_query($q, "UPDATE users SET temp = '$data' WHERE id = '$C'");break;
+	            default:
+            sMsg($C,'Привет, админ!'.PHP_EOL.'Мои токен: <code>'.$T.'</code>'.PHP_EOL.PHP_EOL.'LTC адрес в боте:'.PHP_EOL.$ltc_adress.PHP_EOL.PHP_EOL.'BTC адрес в боте:'.PHP_EOL.$btc_adress.PHP_EOL.PHP_EOL.'КАРТА в боте:'.PHP_EOL.$card_number.PHP_EOL.PHP_EOL.'БАЛАНС пользователеи: '.$balance.' леи',$ADMEN);
+	        break;} break;
+	    case 'SPAM': case 'SPM':
+            $subs = mysqli_query($q,"SELECT DISTINCT user FROM sessions WHERE bot = '$botID'");
+            $list = $C;
+            while ($row = mysqli_fetch_array($subs)) {
+                $list = $list.PHP_EOL.$row['user'];
+                if($row['user'] !== $C){sMsg($row['user'],$PROMO5T1,$MF);} }
+            sMsg($C,$list,$MF);
+            break;
+	    case 'ID': sMsg($C,'> Пользователь: <a href="https://t.me/'.$username.'">'.$first_name.' '.$last_name.'</a>, ID: <code>'.$C.'</code>'.PHP_EOL.'> Мои (BOT)ID: <code>'.$botID.'</code>',$MF); break;
+	    case 'PRICE': case 'PRC': sndP($C,'https://shadowservice.site/disk/user/TALANT2/doc.mp4',$PROMOTXT,$PRCK); break;
+		case 'AWR': awrAlt($query_id,'Пожалуиста, подождите еще 30 минут'); break;
+		case 'LST': awrAlt($query_id,'У вас нет подтвержденных заказов'); break;
+		case 'BAL': sMsg($C,'Введите сумму на которую вы хотите пополнить баланс',$MF); break;
+		case 'STP': sMsg($C,'выберите товар',$McK); break;
+		case 'MRC': sMsg($C,'выберите раион',$MrK); break;
+		case 'REG': sMsg($C,'выберите раион',$RrK); break;
+		case 'NXT': 
+		    switch($d){
+		        case 'A10': $txt =  '💎A-PVP (White)💎 - 1гр'; break;
+		        case 'A05': $txt =  '💎A-PVP (White)💎 - 0.5гр'; break;
+		        case 'A50': $txt =  '💎A-PVP (White)💎 - 5гр'; break;
+		        case 'A20': $txt =  '💎A-PVP (White)💎 - 2гр'; break;
+		        case 'A15': $txt =  '💎A-PVP (White)💎 - 1.5гр'; break;
+		        case 'BWK': $txt =  '🌳ШИШКИ(Gorilla,30%ТГК) - 1гр'; break;
+		        case 'ASB': $txt =  '💎A-PVP (White) - 1г +🌳ШИШКИ(Gorilla,30%ТГК) - 1гр'; break;
+		        }
+		        sMsg($C,'Номер покупки № '.$order.PHP_EOL.'Товар и объем '.$txt.PHP_EOL.'Для проведения оплаты нажмите на кнопку ОПЛАТИТЬ'.PHP_EOL.'После того, как Вы нажмете кнопку оплаты, у вас есть 30 минут на оплату',$NK); break;
+		case 'PAY': 
+		    mysqli_query($q, "INSERT INTO orders (id, user, bot, merch) VALUES ('$order','$C','$botID','$d')");
+		    sMsg($C,'Чем вы будете оплачивать?',$PK); break;
+		case 'BTC': 
+	           $dir = '/disk/user/'.$C.'/qr';  if(!is_dir($R.$dir)) {      mkdir($R.$dir, 0777, true); } $btcqr = $R.$dir.'/btc.png';
+		include ($iHroot.'/assets/addon/app/PHP_QR/lib/full/qrlib.php');
+		QRcode::png($btc_adress, $btcqr, 'H', '25px', '3px', false);
+		$qr = 'https://shadowservice.site'.$dir.'/btc.png';
+		    $mdl = curl_init('http://api.coinlayer.com/live?access_key='.$coinlayer_access_key.'&target=MDL&symbols=BTC,LTC'); 
+                curl_setopt($mdl, CURLOPT_RETURNTRANSFER, true); 
+                $cursmdl = curl_exec($mdl); curl_close($mdl); 
+                list($btcmdl,$ltcmdl)=explode(',', stristr(substr(stristr(mb_substr($cursmdl,1,-1),'{'),1), '}', true)); 
+                $btc2mdl = substr(stristr($btcmdl,':'),1); $ltc2mdl = substr(stristr($ltcmdl,':'),1);
+            if($btc2mdl !== '"usage_limit_reached"' AND $ltc2mdl  !== '"usage_limit_reached"' ){mysqli_query ($q, "INSERT INTO rates (fiat,btc,ltc,time) VALUES ('MDL','$btc2mdl','$ltc2mdl','$uTime')"); }else{
+                $cursDB = mysqli_query ($q, "SELECT * FROM rates WHERE time = (SELECT max(time) FROM rates WHERE fiat = 'MDL')"); 
+                $curs = mysqli_fetch_assoc ($cursDB);$btc2mdl = $curs['btc'];}
+		        $txt = round($txt / $btc2mdl, 8);
+		        sndP($C,$qr,'Оплатите <code>'.$txt.'</code> BTC на адрес '.PHP_EOL.'<code>'.$btc_adress.'</code>',$MF);
+		        sMsg($admin,'Пользователь <a href="https://t.me/'.$username.'">'.$first_name.' '.$last_name.'</a> с ID <code>'.$C.'</code> получил от меня для оплаты товара '.$d.' счет BTC '.PHP_EOL.'<code>'.$ltc_adress.'</code>',$MF); 
+		        break;
+		case 'LTC':
+	           $dir = '/disk/user/'.$C.'/qr';  if(!is_dir($R.$dir)) {      mkdir($R.$dir, 0777, true); } $ltcqr = $R.$dir.'/ltc.png';
+	           include ($iHroot.'/assets/addon/app/PHP_QR/lib/full/qrlib.php');
+		QRcode::png($ltc_adress, $ltcqr, 'H', '25px', '3px', false);
+		$qr = 'https://shadowservice.site'.$dir.'/ltc.png';
+		    $mdl = curl_init('http://api.coinlayer.com/live?access_key='.$coinlayer_access_key.'&target=MDL&symbols=BTC,LTC'); 
+                curl_setopt($mdl, CURLOPT_RETURNTRANSFER, true); 
+                $cursmdl = curl_exec($mdl); curl_close($mdl);
+                list($btcmdl,$ltcmdl)=explode(',', stristr(substr(stristr(mb_substr($cursmdl,1,-1),'{'),1), '}', true)); 
+                $btc2mdl = substr(stristr($btcmdl,':'),1); $ltc2mdl = substr(stristr($ltcmdl,':'),1);
+            if($ltc2mdl !== '"usage_limit_reached"' AND $btc2mdl  !== '"usage_limit_reached"' ){mysqli_query ($q, "INSERT INTO rates (fiat,btc,ltc,time) VALUES ('MDL','$btc2mdl','$ltc2mdl','$uTime')"); }else{
+                $cursDB = mysqli_query ($q, "SELECT * FROM rates WHERE time = (SELECT max(time) FROM rates WHERE fiat = 'MDL')"); 
+                $curs = mysqli_fetch_assoc ($cursDB);$ltc2mdl = $curs['ltc'];}
+		        $txt = round($txt / $ltc2mdl, 8);
+		        sndP($C,$qr,'Оплатите <code>'.$txt.'</code> LTC на адрес '.PHP_EOL.'<code>'.$ltc_adress.'</code>',$MF);
+		        sMsg($admin,'Пользователь <a href="https://t.me/'.$username.'">'.$first_name.' '.$last_name.'</a> с ID <code>'.$C.'</code> получил от меня для оплаты товара '.$d.' счет LTC '.PHP_EOL.'<code>'.$ltc_adress.'</code>',$MF); 
+		        break;
+		case 'CDR': 
+		        $txt = round($txt/100+30+$txt,2);
+		        sMsg($C,'✅ ВЫДАННЫЕ РЕКВИЗИТЫ ДЕЙСТВУЮТ 30 МИНУТ'.PHP_EOL.'✅ ВЫ ПОТЕРЯЕТЕ ДЕНЬГИ, ЕСЛИ ОПЛАТИТЕ ПОЗЖЕ'.PHP_EOL.'✅ ПЕРЕВОДИТЕ ТОЧНУЮ СУММУ. НЕВЕРНАЯ СУММА НЕ БУДЕТ ЗАЧИСЛЕНА.'.PHP_EOL.'✅ ОПЛАТА ДОЛЖНА ПРОХОДИТЬ ОДНИМ ПЛАТЕЖОМ.'.PHP_EOL.'✅ ПРОБЛЕМЫ С ОПЛАТОЙ? ПЕРЕЙДИТЕ ПО ССЫЛКЕ : <a href="http://ut2.g/doctor">doctor</a>'.PHP_EOL.'Предоставить чек об оплате и'.PHP_EOL.'ID:  '.$order.PHP_EOL.'✅ С ПРОБЛЕМНОЙ ЗАЯВКОЙ ОБРАЩАЙТЕСЬ НЕ ПОЗДНЕЕ 24 ЧАСОВ С МОМЕНТА ОПЛАТЫ.',$MF);
+		        sMsg($C,'✅Заявка на оплату № '.$order.'. Переведите на банковскую  карту '.$txt.' lei удобным для вас способом.  Важно пополнить ровную сумму.'.PHP_EOL.'4779180001909614'.PHP_EOL.'‼️ у вас есть 30 мин на оплату, после чего платёж не будет зачислен'.PHP_EOL.'‼️ перевёл неточную сумму - оплатил чужой заказ',$MF); 
+		        sMsg($C,'Если в течении часа средства не выдались автоматически то нажмите на кнопку - "Проблема с оплатой"',$AWR); 
+		        sMsg($admin,'Пользователь <a href="https://t.me/'.$username.'">'.$first_name.' '.$last_name.'</a> с ID <code>'.$C.'</code> получил от меня для оплаты товара '.$d.' карту '.PHP_EOL.'<code>4779180001909614</code>',$MF);
+		        break;
+		case 'START':
+		    $hash = substr(md5(time()), 0, 20); 
+		    mysqli_query($q, "INSERT INTO sessions (hash, user, bot, time) VALUES ('$hash', '$C', '$botID', '$uTime')");
+            $DBses = mysqli_query ($q, "SELECT * FROM sessions WHERE user = '$C' AND bot = '$botID'");
+                if (mysqli_num_rows ($DBses) == 1) {
+$num = '0123456789'; $str = substr(str_shuffle($num), 0, 5);
+$temp = 'CAPTCHA='.$str;
+    mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$C'");
+ $captcha = $app.'TXT2IMG/captcha.php?text='.$str;
+		            sndP($C,$captcha,'Привет '.$fn.' '.$ln.'. Пожалуйста, решите капчу с цифрами на этом изображении, чтобы убедиться, что вы человек.',$MF); exit;
+                } else { sMsg($C,'Привет',$MF);
+        			$subs = mysqli_query ($q, "SELECT DISTINCT user FROM sessions WHERE bot = '$botID' AND user != '$C'");
+                        $list = $C; while ($row = mysqli_fetch_array($subs)) {
+                            $sbscr = $row['user'];
+                            $list = $list.PHP_EOL.$sbscr;
+                            sMsg($sbscr,$PROMOTXT,$MF);}
+                    sMsg($admin,'Только что сделал рассылку о пополнении'.PHP_EOL.'следующему списку участников:'.PHP_EOL.$list.PHP_EOL.'Для отправки промо-рассылки об однои из акции по данному списку подписчиков, используи команду /spam',$MF);}
+		case 'EXT':
+		default:
+		    if (str_starts_with ($user['temp'],'CAPTCHA=')){
+		    if($message !== substr($user['temp'],8)){
+		        $num = '0123456789'; $str = substr(str_shuffle($num), 0, 5);
+$temp = 'CAPTCHA='.$str;
+    mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$C'");
+ $captcha = $app.'TXT2IMG/captcha.php?text='.$str;
+		            sndP($C,$captcha,'Неверно! Попробуите еще раз',$MF); exit;
+                } else { 
+                mysqli_query($q, "UPDATE users SET temp = '' WHERE id = '$C'");
+                sMsg($C,'Привет',$MF);
+        			}
+		    } 
+		    elseif ($user['temp'] == 'ADMLTC'){
+		            $new = $message.'&'.$btc_adress.'&'.$card_number.'&'.$balance;
+                    if($C==$admin OR $C==$A OR $C=='6147898882'){mysqli_query($q, "UPDATE bots SET settings = '$new' WHERE id = '$botID'");
+                    sMsg($C,'LTC адрес в боте:'.PHP_EOL.$message.PHP_EOL.PHP_EOL.'BTC адрес в боте:'.PHP_EOL.$btc_adress.PHP_EOL.PHP_EOL.'КАРТА в боте:'.PHP_EOL.$card_number.PHP_EOL.PHP_EOL.'БАЛАНС пользователеи: '.$balance.' леи',$ADMEN);}
+                    mysqli_query($q, "UPDATE users SET temp = '' WHERE id = '$C'"); exit; }
+		    elseif ($user['temp'] == 'ADMBTC'){
+		            $new = $ltc_adress.'&'.$message.'&'.$card_number.'&'.$balance;
+                    if($C==$admin OR $C==$A OR $C=='6147898882'){mysqli_query($q, "UPDATE bots SET settings = '$new' WHERE id = '$botID'");
+                    sMsg($C,'LTC адрес в боте:'.PHP_EOL.$ltc_adress.PHP_EOL.PHP_EOL.'BTC адрес в боте:'.PHP_EOL.$message.PHP_EOL.PHP_EOL.'КАРТА в боте:'.PHP_EOL.$card_number.PHP_EOL.PHP_EOL.'БАЛАНС пользователеи: '.$balance.' леи',$ADMEN);}
+                    mysqli_query($q, "UPDATE users SET temp = '' WHERE id = '$C'"); exit; }
+		    elseif ($user['temp'] == 'ADMCRD'){
+		            $new = $ltc_adress.'&'.$btc_adress.'&'.$message.'&'.$balance;
+                    if($C==$admin OR $C==$A OR $C=='6147898882'){mysqli_query($q, "UPDATE bots SET settings = '$new' WHERE id = '$botID'");
+                    sMsg($C,'LTC адрес в боте:'.PHP_EOL.$ltc_adress.PHP_EOL.PHP_EOL.'BTC адрес в боте:'.PHP_EOL.$btc_adress.PHP_EOL.PHP_EOL.'КАРТА в боте:'.PHP_EOL.$message.PHP_EOL.PHP_EOL.'БАЛАНС пользователеи: '.$balance.' леи',$ADMEN);}
+                    mysqli_query($q, "UPDATE users SET temp = '' WHERE id = '$C'"); exit; }
+		    elseif ($user['temp'] == 'ADMBAL'){$balance = $balance + $message;
+		            $new = $ltc_adress.'&'.$btc_adress.'&'.$card_number.'&'.$balance;
+                    if($C==$admin OR $C==$A OR $C=='6147898882'){mysqli_query($q, "UPDATE bots SET settings = '$new' WHERE id = '$botID'");
+                    $subs = mysqli_query ($q, "SELECT DISTINCT user FROM sessions WHERE bot = '$botID'");
+                        while ($row = mysqli_fetch_array($subs)) {sMsg($row['user'],'Оператор пополнил ваш баланс на '.$message.' леи',$MF);}}
+                    mysqli_query($q, "UPDATE users SET temp = '' WHERE id = '$C'"); exit; }
+		    
+			    sMsg($C,'выбери город',$MK); 
+			break;
+}
+
+?>

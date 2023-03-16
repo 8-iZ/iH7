@@ -1,0 +1,15 @@
+<?php
+if ($RegEx == 'need'){ 
+	include ('regex/init.php'); 
+	} else {
+	
+$url_p = '/(http:\/\/|https:\/\/)?(www)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-\?\%\&]*)*\/?/i';
+
+$token_p = '/[0-9]{9,11}:[a-zA-Z0-9_-]{35}/';
+
+$email_p = '/^[\w\.\-]+\@+[a-z]+\.+[a-z]{2,5}$/';
+
+$username_p = '/\@+[a-zA-Z0-9]{5,30}/';
+
+}
+?>

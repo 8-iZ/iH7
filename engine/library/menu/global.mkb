@@ -1,0 +1,11 @@
+<?php
+
+include ('buttons/default.btn');
+
+$helpMKb = [[$helpBtn]];
+$okKb = [[$okBut],[$noBut]];
+$banMKb = [['❌ БАН (60 сек.) ❌'.PHP_EOL.'нажми чтобы обновить']];
+
+include ('store.mkb');
+
+?>

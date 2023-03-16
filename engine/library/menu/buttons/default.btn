@@ -1,0 +1,7 @@
+<?php
+
+$helpBtn = array ("text" => 'СПРАВКА', "callback_data" => "KDHP");
+$okBut = array ("text" => "да, я уверен", "callback_data" => "KDBU");
+$noBut = array ("text" => "нет, вернуться к оплате", "callback_data" => "KDDM");
+
+?>

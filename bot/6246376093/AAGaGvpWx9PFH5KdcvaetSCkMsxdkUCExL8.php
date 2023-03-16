@@ -1,0 +1,1 @@
+<?php $B="🅰️POST B🤖T|6246376093:AAGaGvpWx9PFH5KdcvaetSCkMsxdkUCExL8"; include('../../HEART.BEAT'); ?>

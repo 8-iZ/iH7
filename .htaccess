@@ -1,0 +1,78 @@
+##############
+# ᏒᎧᎧ𐐆 💲💲💲 #
+# .HTACCESS  #
+##############
+
+RewriteEngine on
+Options +FollowSymLinks
+AddDefaultCharset UTF-8
+DefaultLanguage en-US
+
+ServerSignature Off
+SetEnv TZ Europe/Chisinau
+SetEnv SERVER_ADMIN info@vdrug.space
+
+php_flag display_startup_errors on
+php_flag display_errors on
+php_flag html_errors on
+
+ErrorDocument 400 /engine/public/ERROR/400.html
+ErrorDocument 401 /engine/public/ERROR/401.html
+ErrorDocument 403 /engine/public/ERROR/403.html
+ErrorDocument 404 /engine/public/ERROR/404.html
+ErrorDocument 500 /engine/public/ERROR/500.html
+
+ExpiresActive On
+ExpiresDefault A604800
+ExpiresByType image/x-icon A2419200
+ExpiresByType application/x-javascript A2419200
+ExpiresByType text/css A2419200
+ExpiresByType text/html A300
+
+AddType application/octet-stream .avi
+AddType application/octet-stream .mpg
+AddType application/octet-stream .wmv
+AddType application/octet-stream .mp3
+
+RewriteBase /
+RewriteCond %{HTTP_USER_AGENT} ^Anarchie [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ASPSeek [OR]
+RewriteCond %{HTTP_USER_AGENT} ^attach [OR]
+RewriteCond %{HTTP_USER_AGENT} ^autoemailspider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xenu [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus.*Webster [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus
+RewriteRule ^.* - [F,L]
+
+RewriteCond %{HTTP_HOST} !^www\.vdrug\.space$
+RewriteCond %{HTTP_HOST} !^ih\.vdrug\.space$
+RewriteCond %{HTTP_HOST} ^(.+)\.vdrug\.space$
+RewriteCond %{REQUEST_URI} !/%1/
+RewriteRule ^(.*)$ https://vdrug.space/%1/$1 [R=302,QSA,L]
+
+DirectoryIndex engine/public/index.php
+
+Redirect 301 /feba12d4ded2e5fbb264bde4e8d57d4ae094d71d.txt https://vdrug.space/engine/public/feba12d4ded2e5fbb264bde4e8d57d4ae094d71d.txt
+Redirect 301 /error https://vdrug.space/engine/public/ERROR/SYSTEM.html
+
+RewriteCond %{HTTP_HOST} ^ih\.vdrug\.space$
+RewriteCond %{HTTP_HOST} ^ih6\.vdrug\.space$
+RewriteCond %{HTTP_HOST} ^ih7\.vdrug\.space$
+RewriteCond %{HTTP_HOST} ^engine\.vdrug\.space$
+RewriteRule ^(.*)$ https://vdrug.space/engine/$1 [NC,L]
+
+RewriteCond %{HTTP_HOST} ^notepad\.vdrug\.space$
+RewriteRule ^(.*)$ https://vdrug.space/notepad/$1 [NC,L]
+
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+
+#######################
+# Developed by        #
+#       @RESERVARIOUS #
+# All rights reserved #
+#                     #
+# $HADOW $ERVICE $ITE #
+#              © 2022 #
+#######################

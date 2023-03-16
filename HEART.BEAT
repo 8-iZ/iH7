@@ -1,0 +1,14 @@
+<?php
+
+        $R = $_SERVER['DOCUMENT_ROOT']; 
+        
+    $license_key = file_get_contents($R.'/cert/license.ih6');
+     $configuration = preg_replace('/[0-9]+/', '', $license_key);
+     $engine_config = preg_replace('/['.$configuration.']/', '', $license_key);
+include ($R.'/cert/.'.$configuration);
+include ($R.'/'.$engineDir.'/config/'.$engine_config.'.php');
+        
+include ($iHcore.'BIOS/BOOT.php');
+include ($iHroot.'ENGINE.php');
+
+?>

@@ -1,0 +1,10 @@
+$endpoint = 'convert';
+$from = 'BTC';
+$to = 'GBP';
+$amount = 10;
+$ch = curl_init('https://api.coinlayer.com/api/'.$endpoint.'?access_key='.$access_key.'&from='.$from.'&to='.$to.'&amount='.$amount.'');   
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$json = curl_exec($ch);
+curl_close($ch);
+$conversionResult = json_decode($json, true);
+sMsg($C,$conversionResult['result'],$MF);

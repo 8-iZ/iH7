@@ -1,0 +1,42 @@
+
+	
+<?php
+// строка, для подписи, указанная при регистрации мерчанта
+$signature = "123456";
+$data = $_POST['data'];
+$key = $_POST['key'];
+$jsondata = base64_decode($data);
+$vrfsign = hash('sha256',hash('sha256',$data).hash('sha256',$signature));
+if ($key == $vrfsign) {
+    if ((string)$jsondata->comand == "check") {
+        // проверка существования указанного order_id
+        // 100 - номер существует, 50 - номер не существует
+        $json_answer = [
+            'code' => 50,
+            'text' => 'not exist'
+        ];
+        echo json_encode($json_answer);
+    } else
+        if ((string)$jsondata->comand == "pay") {
+        // здесь осуществляем обработку данного платежа
+        $json_answer = [
+            'code' => 100,
+            'text' => 'success'
+        ];
+        echo json_encode($json_answer);
+    } else {
+            $json_answer = [
+                'code' => 30,
+                'text' => 'unknown method'
+            ];
+            echo json_encode($json_answer);
+        }
+
+    $json_answer = [
+        'code' => 30,
+        'text' => 'unknown method'
+    ];
+    echo json_encode($json_answer);
+}
+	
+?>

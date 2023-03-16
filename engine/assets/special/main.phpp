@@ -1,0 +1,23 @@
+<?php  
+
+include ($_SERVER['DOCUMENT_ROOT'].'/iH6/config/loading');
+include ($iHroot.'assets/special/KERNEL/RAM/BASIC.php');
+include ($iHroot.'assets/special/KERNEL/API/BASIC.php');
+include ($iHroot.'config/init.php');
+include ($iHroot.'kernel/CPU/token.php');
+include ($iHroot.'assets/special/KERNEL/CPU/LOADING.php');
+include ($iHroot.'assets/special/KERNEL/CPU/FIREWALL.php');
+include ($iHroot.'assets/special/LIBRARY/KEYBOARD.php');
+include ($iHroot.'assets/special/KERNEL/CPU/VERIFICATION.php');
+include ($iHroot.'assets/special/KERNEL/GUI/CONTROLLER.php');
+
+include ($iHroot.'assets/special/KERNEL/AI/HELLO.php');
+//include ($iHroot.'assets/special/KERNEL/HKEY/Q.php');
+	$DIRX = $iHroot.'assets/special/ADDON/';
+include ($iHroot.'assets/special/INTEL.php');
+
+
+
+
+
+?>

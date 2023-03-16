@@ -1,0 +1,14 @@
+<?php
+
+include ('func.php');
+include ('verif.php');
+//include ('catch.php');
+
+
+switch ($m) {
+    case '/test':
+        sMsg($c,'TEST RESULT',$menu);
+        break;
+}
+
+?>

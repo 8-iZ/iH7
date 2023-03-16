@@ -1,0 +1,30 @@
+#
+# .HTACCESS
+#
+RewriteEngine On
+#
+AddDefaultCharset UTF-8
+#
+#ErrorDocument 404 /error/404.php
+#php_flag display_errors on
+#php_value error_reporting E_ALL
+#
+RewriteBase /
+#
+RewriteCond %{HTTP_HOST}  ^www\.(.+)$  [NC]
+RewriteRule ^(.*)         https://%1/$1 [L,R=301]
+#
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+#
+#RewriteCond %{HTTP_HOST} !^www\.shadowservice\.site$
+#RewriteCond %{HTTP_HOST} ^(.+)\.shadowservice\.site$
+#RewriteCond %{REQUEST_URI} !/%1/
+#RewriteRule ^(.*)$ https://shadowservice.site/%1/$1 [R=302,QSA,L]
+#
+# Developed by 
+#       @RESERVARIOUS
+# All rights reserved
+#
+# $HADOW $ERVICE $ITE
+#                2022

@@ -1,0 +1,632 @@
+<?php 
+
+include ('verif.php');
+
+include ('catch.php');
+
+//include ('query.php');
+
+
+if ($c > 0) {
+
+switch ($m) {
+	case '/break': break;
+	case 'NEW iR0N H3ART':
+	case '/newironheart':
+	case '/connection':
+	case '/newbot':
+	case '/bot':
+	mysqli_query($q, "UPDATE users SET temp = 'iH6=BOT' WHERE id = '$c'");
+	sMsg($c,'Привет! Сейчас мы попробуем подключить вашего бота к функционалу нашего сервиса используя движок "iR0N H3ART 6". Если все получится, совсем скоро и у твоего Бота появится свое 🫀 сердце!',$iHiK);
+	sMsg($c,'Итак, для начала, напишите как называется ваш проект:',$iHKM);
+	break;
+	case 'iH6':
+$sub = substr($d, 0, 2);
+if ($sub == 'BT'){
+$type = substr($d, -1);
+$newB = $user['temp'];
+mysqli_query($q, "UPDATE bots SET type = '$type' WHERE id = '$newB'");
+$fromDB = mysql_query("SELECT * FROM bots WHERE id = '$newB'");
+	$new = mysqli_fetch_assoc($fromDB);
+	$ttl = $new['name'];
+	$nkey = $new['skey'];
+	$nick = $new['nick'];
+mkdir('../../../bot/'.$newB, 0777);
+$index = fopen('../../../bot/'.$newB.'/index.php', 'w');
+	fwrite($index, '<?php'.PHP_EOL.PHP_EOL.'$botID = \''.$newB.'\';'.PHP_EOL.'$title = \''.$ttl.'\';'.PHP_EOL.'$key = \''.$nkey.'\';'.PHP_EOL.'include (\'../../iH6/config/init.php\');'.PHP_EOL.'$token = $botID.\':\'.$key;'.PHP_EOL.'include (\'../../iH6/assets/special/main.php\');'.PHP_EOL.PHP_EOL.'?>');
+	fclose($index); 
+$pasport = fopen('../../../bot/'.$newB.'/'.$nkey, 'w');
+	fclose($pasport); 
+	$iHLtxt = 'Вот, пожалуй, и всё! Осталось последовательно нажать на эти две кнопки ниже. Первая откроется в браузерном окне поверх мессенджера. Если сообщение в нем оповестит об успехе операции, значит все сделано верно и можно, закрыв данное окно нажать на вторую кнопку и перейти к панели управления своим ботом. Если в сообщении будет содержаться информация об ошибке, пытаться исправить ее самостоятельно не стоит; рекомендуется обратиться в нашу службу клиентской поддержки и описать подробно свои действия и текст полученный в открывшемся окне.';
+$url1 = "https://api.telegram.org/bot'.$newB.':'.$nkey.'/setWebhook?url=https://shadowservice.site/bot/'.$newB.'/index.php";
+$url2 = "https://'.$nick.'.t.me" ;
+	$WHBTN = array ("text" => "1️⃣ ПРОВЕРКА СОЕДИНЕНИЯ", "url" => $url1);
+	$CPBTN = array ("text" => "2️⃣ ПАНЕЛЬ УПРАВЛЕНИЯ", "url" => $url2);
+	$iHLK = json_encode(array ("inline_keyboard" => [[$WHBTN],[$CPBTN]]));
+	sMsg($c,$iHLtxt,$iHLK);}
+	break;
+	case 'показать'.PHP_EOL.'все товары':
+	case 'выгрузить'.PHP_EOL.'базу данных':
+    case 'КАТАЛОГ'.PHP_EOL.'по категориям':
+    case 'КАТАЛОГ'.PHP_EOL.'по алфавиту':
+    case '⏏️ Отмена':
+    case '⏺ Черновик':
+    case '↪️ Заново':
+        break;
+	case '/database':
+	case '/adminer':
+	    $txt = '';
+	$result = mysqli_query($q, 'SHOW TABLES') or die('cannot show tables');
+while($tableName = mysqli_fetch_row($result)) {
+    $table = $tableName[0];
+    $result2 = mysqli_query($q,'SHOW COLUMNS FROM '.$table) or die('cannot show columns from '.$table);
+    if(mysqli_num_rows($result2)) {
+        while($row2 = mysqli_fetch_row($result2)) {
+            $txt = $txt.$table.':'.PHP_EOL;
+            foreach($row2 as $key=>$value) {
+                $txt = $txt.'|'.$value.'|';}
+            $txt = $txt.PHP_EOL.PHP_EOL;
+    }}}
+        sMsg ($c,$txt,$menu);
+	break;
+	case 'продажи': $result = mysqli_query ($q, "SELECT * FROM orders WHERE bot = '$botID' AND status = '1'"); break;
+	case 'пакетное'.PHP_EOL.'добавление':
+	mysqli_query($q, "UPDATE users SET temp = 'NEW=PAK' WHERE id = '$c'");
+	$kodBtn = array ("text" => "КОДЫ ЛОКАЦИЙ", "callback_data" => "BTNKOD");
+	$xmpBtn = array ("text" => "ПРИМЕР ЗАПРОСА", "callback_data" => "BTNXMP");
+	$menu = json_encode(array ("inline_keyboard" => [[$kodBtn,$xmpBtn]]));
+	sMsg($c,'Пришлите ответным сообщением или прикрепите файлом текст, содержащий не менее 5 данных товаров, каждый из которых должен быть обозначен в новой строке и заключен в квадратные скобки <[]>, перед которыми следует указать следующие характеристики через точку с запятой <;>: код города; код района; наименование; комплектация; цена в <$> (без указания значка валюты). Коды городов, районов и пример правильного оформления данных можно посмотреть ниже',$menu);
+	break;
+	case 'курьеры':
+	break;
+	case '🎲 РАНДОМНЫЙ БОТ 🎲':
+	$result = mysqli_query ($q, "SELECT id FROM bots WHERE type = '$type' AND status = '1' AND switcher = '1'");
+	for ($set = array (); $row = $result->fetch_assoc(); $set[] = $row['id']);
+	$count = count($set);
+	$rand = rand(1,$count);
+	$randBot = $set[$rand];
+	if ($count === 1) {
+	$countDB = mysql_query("SELECT COUNT(1) FROM bots WHERE status = '1' AND switcher = '1'");
+$count = mysql_fetch_array( $countDB );
+$rand = rand(1,$count);
+	$randBot = $set[$rand];
+	if ($randBot == $botID){
+	$rand = rand($rand,$count); 
+	$randBot = $set[$rand];}}
+	$randDB = mysql_query("SELECT * FROM bots WHERE id = '$randBot'");
+	$rBot = mysqli_fetch_assoc($randDB);
+	$ttl = $rBot['title'];
+	$url = 'https://t.me/'.$rBot['nick'];
+	$btn = array ("text" => $ttl, "url" => $url);
+	$menu = json_encode(array ("inline_keyboard" => [[$btn]]));
+	sMsg($c,'ВАШ СЛУЧАЙНЫЙ БОТ:',$menu);
+	break;
+	case 'добавить'.PHP_EOL.'товар':
+	 include ('merch.php');break;
+	case 'CONTROL PANEL: 🟢N':
+sMsg($c,'Панель управления отключена', $CPoffM);
+	break;
+	case 'CONTROL PANEL: 🔴FF':
+sMsg($c,'Панель управления влючена', $CPM);
+	break;
+	case 'Я не админ':
+mysqli_query($q, "UPDATE users SET temp = '' WHERE id = '$c'");
+   case '/start':
+if ($bot['master'] !== $c) {
+sMsg($c, $HIUTXT, $menu); }
+	case '/new':
+	case 'НОВАЯ ПОКУПКА':
+$DBcity = mysqli_query ($q, "SELECT DISTINCT city FROM merches WHERE seller = '$type'");
+$extDB = mysqli_query ($q, "SELECT * FROM extensions WHERE bot = '$botID'");
+$ext =mysqli_fetch_assoc($extDB);
+$locSv = $ext['loc_saver'];
+if (mysqli_num_rows ($DBcity) == 0) {
+	sMsg($c, 'Бот пуст, попробуй позже', $menu); } 
+elseif ($locSv == '0' OR empty ($user['city']) OR $user['city'] == 'NULL'){
+	for ($set = array (); $row = $DBcity->fetch_assoc(); $set[] = $row['city']);
+	$count = count($set);
+if($count === 1){$tc='1';}
+elseif($count === 2){$tc='2';}
+elseif($count === 3){$tc='3';}
+switch ($tc) {   
+	case '3':
+$city3 = $set[2];
+$DBct = mysqli_query ($q, "SELECT * FROM places WHERE city = '$city3'");
+	$ct = mysqli_fetch_assoc($DBct);
+		$short = $ct['name'];
+$DBcb = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$short'");
+	$cb = mysqli_fetch_assoc($DBcb);
+		$tx = $cb['title'];
+		$cb = $cb['callback'];
+$button3 = array ("text" => $tx, "callback_data" => $cb);
+	case '2':
+$city2 = $set[1];
+$DBct = mysqli_query ($q, "SELECT * FROM places WHERE city = '$city2'");
+	$ct = mysqli_fetch_assoc($DBct);
+		$short = $ct['name'];
+$DBcb = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$short'");
+	$cb = mysqli_fetch_assoc($DBcb);
+		$tx = $cb['title'];
+		$cb = $cb['callback'];
+$button2 = array ("text" => $tx, "callback_data" => $cb);
+	case '1':
+$city1 = $set[0];
+$DBct = mysqli_query ($q, "SELECT * FROM places WHERE city = '$city1'");
+	$ct = mysqli_fetch_assoc($DBct);
+		$short = $ct['name'];
+$DBcb = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$short'");
+	$cb = mysqli_fetch_assoc($DBcb);
+		$tx = $cb['title'];
+		$cb = $cb['callback'];
+$button1 = array ("text" => $tx, "callback_data" => $cb);
+	break;}
+if ($count === 1){$btn = [[$button1]];}
+elseif ($count === 2){$btn = [[$button1,$button2]];}
+elseif ($count === 3){$btn = [[$button1],[$button2,$button3]];}
+	$menu = json_encode(array ("inline_keyboard" => $btn));
+sMsg($c, 'Выберите свой город в меню ниже:', $menu);
+} else {
+$city = $user['city'];
+	$DBcity = mysqli_query ($q, "SELECT DISTINCT name FROM merches WHERE seller = '$type' AND city = '$city'");
+	$DBor = mysqli_query ($q, "SELECT name FROM places WHERE city = '$city'");
+$or = mysqli_fetch_assoc($DBor);
+$ors = $or['name'];
+$DBors = mysqli_query ($q, "SELECT title FROM callbacks WHERE short = '$ors'");
+$orasDB = mysqli_fetch_assoc($DBors);
+$oras = $orasDB['title'];
+		if (mysqli_num_rows ($DBcity) == 0) {
+sMsg($c, 'Бот пуст, попробуй позже', $menu);
+		} else {
+for ($set = array (); $row = $DBcity->fetch_assoc(); $set[] = $row['name']);
+	$count = count($set);
+if($count === 1){$tc='1';}
+elseif($count === 2){$tc='2';}
+elseif($count === 3){$tc='3';}
+elseif($count === 4){$tc='4';}
+switch ($tc) {   
+case '4':
+$mrcN4 = $set[3];
+$mrc4 = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$mrcN4'");$mrc = mysqli_fetch_assoc($mrc4);$callback = $mrc['callback'];$button4 = array ("text" => $mrcN4, "callback_data" => $callback);	
+	case '3':
+$mrcN3 = $set[2];
+$mrc3 = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$mrcN3'");$mrc = mysqli_fetch_assoc($mrc3);$callback = $mrc['callback'];$button3 = array ("text" => $mrcN3, "callback_data" => $callback);	
+	case '2':$mrcN2 = $set[1];$mrc2 = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$mrcN2'");$mrc = mysqli_fetch_assoc($mrc2);$callback = $mrc['callback'];$button2 = array ("text" => $mrcN2, "callback_data" => $callback);	
+	case '1':$mrcN1 = $set[0];$mrc1 = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$mrcN1'");$mrc = mysqli_fetch_assoc($mrc1);$callback = $mrc['callback'];$button1 = array ("text" => $mrcN1, "callback_data" => $callback);break;}
+	
+if ($count === 1){$btn = [[$button1]];}
+elseif ($count === 2){$btn = [[$button1,$button2]];}
+elseif ($count === 3){$btn = [[$button1],[$button2,$button3]];}
+elseif ($count === 4){$btn = [[$button1,$button2],[$button3,$button4]];}
+$menu = json_encode(array("inline_keyboard" => $btn));
+
+sMsg($c, 'Вы ранее сохранили город: "'.$oras.$mS, $menu);}}
+	break;
+	case 'ORS':
+if (!empty ($data)){
+	$result = mysqli_query ($q, "SELECT * FROM callbacks WHERE callback = '$data'");
+	$ors = mysqli_fetch_assoc($result);
+	$oras = $ors['title'];
+	$short = $ors['short'];
+	$yM[] = array('⛔️ НEТ, и больше не спрашивать');
+$menu = json_encode(array(
+	'resize_keyboard' => true,
+	'one_time_keyboard' => true,
+	'keyboard' => $yM));
+	sMsg($c, $cS.$oras.'"'.PHP_EOL.'Желаете ли вы сохранить этот город и в дальнейшем пропускать этот шаг в процессе покупки?', $menu);
+	$temp = 'ORS='.$short;
+	mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");
+} else {
+$citDB = mysqli_query($q, "SELECT * FROM places WHERE name = '$tPrm'");
+	$city = mysqli_fetch_assoc($citDB);
+	$city = $city['city'];
+$orsDB = mysqli_query($q, "SELECT * FROM callbacks WHERE short = '$tPrm'");
+	$oras = mysqli_fetch_assoc($orsDB);
+	$oras = $oras['title'];
+if ($message == '✅ ДA'){
+	mysqli_query($q, "UPDATE users SET city = '$city', temp = '' WHERE id = '$c'"); }
+elseif ($message == '⛔️ НEТ, и больше не спрашивать'){
+	mysqli_query($q, "UPDATE users SET city = 'NULL', temp = '' WHERE id = '$c'");}
+elseif ($message == '⛔️ НEТ'){ 
+	mysqli_query($q, "UPDATE users SET temp = '' WHERE id = '$c'");}
+	$result = mysqli_query ($q, "SELECT DISTINCT name FROM merches WHERE seller = '$type' AND city = '$city'");
+for ($set = array (); $row = $result->fetch_assoc(); $set[] = $row['name']);
+$count = count($set);
+if($count === 1){$tc='1';}
+elseif($count === 2){$tc='2';}
+elseif($count === 3){$tc='3';}
+switch ($tc) {   case '3':$mrcN3 = $set[2];$mrc3 = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$mrcN3'");$mrc = mysqli_fetch_assoc($mrc3);$callback = $mrc['callback'];$button3 = array ("text" => $mrcN3, "callback_data" => $callback);	case '2':$mrcN2 = $set[1];$mrc2 = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$mrcN2'");$mrc = mysqli_fetch_assoc($mrc2);$callback = $mrc['callback'];$button2 = array ("text" => $mrcN2, "callback_data" => $callback);	case '1':$mrcN1 = $set[0];$mrc1 = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$mrcN1'");$mrc = mysqli_fetch_assoc($mrc1);$callback = $mrc['callback'];$button1 = array ("text" => $mrcN1, "callback_data" => $callback);break;}
+if ($count === 1){$btn = [[$button1]];}elseif ($count === 2){$btn = [[$button1,$button2]];}elseif ($count === 3){$btn = [[$button1],[$button2,$button3]];}
+$menu = json_encode(array("inline_keyboard" => $btn));
+sMsg($c, $cS.$oras.$mS, $menu);}
+      break;
+   case 'SEL':
+$mrcDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE callback = '$data'");
+	$cb = mysqli_fetch_assoc($mrcDB);
+	$name = $cb['title'];
+$result = mysqli_query ($q, "SELECT DISTINCT sector FROM merches WHERE seller = '$type' AND city = '37301' AND name = '$name'");
+		for ($set = array (); $row = $result->fetch_assoc(); $set[] = $row['sector']);
+$count = count($set);
+if($count === 1){$tc='1';}
+elseif($count === 2){$tc='2';}
+elseif($count === 3){$tc='3';}
+elseif($count === 4){$tc='4';}
+elseif($count === 5){$tc='5';}
+switch ($tc) {   case '5': $sec5 = $set[4];$secDB = mysqli_query ($q, "SELECT * FROM places WHERE sector = '$sec5'");$sec = mysqli_fetch_assoc($secDB);
+$sector = $sec['name'];
+$cbDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$sector'");$cb = mysqli_fetch_assoc($cbDB);
+$callback = $cb['callback'];
+$title = $cb['title'];
+$button5 = array ("text" => $title, "callback_data" => $callback);	
+case '4': $sec4 = $set[3];$secDB = mysqli_query ($q, "SELECT * FROM places WHERE sector = '$sec4'");$sec = mysqli_fetch_assoc($secDB);
+$sector = $sec['name'];
+$cbDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$sector'");$cb = mysqli_fetch_assoc($cbDB);
+$callback = $cb['callback'];
+$title = $cb['title'];
+$button4 = array ("text" => $title, "callback_data" => $callback);	
+case '3': $sec3 = $set[2];$secDB = mysqli_query ($q, "SELECT * FROM places WHERE sector = '$sec3'");$sec = mysqli_fetch_assoc($secDB);
+$sector = $sec['name'];
+$cbDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$sector'");$cb = mysqli_fetch_assoc($cbDB);
+$callback = $cb['callback'];
+$title = $cb['title'];
+$button3 = array ("text" => $title, "callback_data" => $callback);	
+case '2': $sec2 = $set[1];$secDB = mysqli_query ($q, "SELECT * FROM places WHERE sector = '$sec2'");$sec = mysqli_fetch_assoc($secDB);
+$sector = $sec['name'];
+$cbDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$sector'");$cb = mysqli_fetch_assoc($cbDB);
+$callback = $cb['callback'];
+$title = $cb['title'];
+$button2 = array ("text" => $title, "callback_data" => $callback);	
+case '1': $sec1 = $set[0];$secDB = mysqli_query ($q, "SELECT * FROM places WHERE sector = '$sec1'");$sec = mysqli_fetch_assoc($secDB);
+$sector = $sec['name'];
+$cbDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$sector'");$cb = mysqli_fetch_assoc($cbDB);
+$callback = $cb['callback'];
+$title = $cb['title'];
+$button1 = array ("text" => $title, "callback_data" => $callback);	
+break;}
+if ($count === 1){$btn = [[$button1]];}elseif ($count === 2){$btn = [[$button1,$button2]];}elseif ($count === 3){$btn = [[$button1],[$button2,$button3]];}elseif ($count === 4){$btn = [[$button1,$button2],[$button3,$button4]];}elseif ($count === 5){$btn = [[$button1],[$button2,$button3],[$button4,$button5]];}
+$menu = json_encode(array("inline_keyboard" => $btn));
+sMsg($c, $cS.$name.$sS, $menu);
+$temp = $botID.'='.$name;
+mysqli_query
+($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");
+break;
+      case 'SEC':
+$usDB = mysqli_query ($q, "SELECT * FROM users WHERE id = '$c'");
+$us = mysqli_fetch_assoc($usDB);
+$temp = $us['temp'];
+list($tBot,$tMrc) = explode ('=', $temp);
+if (empty($temp) OR $tBot !== $botID){
+sMsg($c, 'Данная сессия истекла. Начните новую покупку.', $menu);
+} else {
+$scDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE callback = '$data'");
+$sc = mysqli_fetch_assoc($scDB);
+$sector = $sc['title'];
+$sct = $sc['short'];
+$secDB = mysqli_query ($q, "SELECT * FROM places WHERE name = '$sct'");
+$sec = mysqli_fetch_assoc($secDB);
+$sect = $sec['sector'];
+$temp = $temp.'&'.$sect;
+$result = mysqli_query ($q, "SELECT DISTINCT complectation FROM merches WHERE name = '$tMrc' AND seller = '$type' AND sector = '$sect'");
+for ($set = array (); $row = $result->fetch_assoc(); $set[] = $row['complectation']);
+$count = count($set);
+if($count === 1){$tc='1';}
+elseif($count === 2){$tc='2';}
+elseif($count === 3){$tc='3';}
+switch ($tc) {   
+case '3':
+$wN3 = $set[2];
+$mrc3 = mysqli_query ($q, "SELECT DISTINCT * FROM merches WHERE name = '$tMrc' AND seller  = '$type' AND complectation = '$wN3' LIMIT 1");
+$mrc = mysqli_fetch_assoc($mrc3);
+$price3 = $mrc['price'];
+$flag3 = $wN3.'г => '.$price3.'$';
+$cbDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$wN3'");
+$cb3 = mysqli_fetch_assoc($cbDB);
+$callback3 = $cb3['callback'];
+$button3 = array ("text" => $flag3, "callback_data" => $callback3);	
+case '2':
+$wN2 = $set[1];
+$mrc2 = mysqli_query ($q, "SELECT DISTINCT * FROM merches WHERE name = '$tMrc' AND seller  = '$type' AND complectation = '$wN2' LIMIT 1");
+$mrc = mysqli_fetch_assoc($mrc2);$price2 = $mrc['price'];
+$flag2 = $wN2.'г => '.$price2.'$';
+$cbDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$wN2'");
+$cb2 = mysqli_fetch_assoc($cbDB);
+$callback2 = $cb2['callback'];
+$button2 = array ("text" => $flag2, "callback_data" => $callback2);
+case '1':
+$wN1 = $set[0];
+$mrc1 = mysqli_query ($q, "SELECT DISTINCT * FROM merches WHERE name = '$tMrc' AND seller  = '$type' AND complectation = '$wN1' LIMIT 1");
+$mrc = mysqli_fetch_assoc($mrc1);$price1 = $mrc['price'];
+$flag1 = $wN1.'г => '.$price1.'$';
+$cbDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE title = '$wN1'");
+$cb1 = mysqli_fetch_assoc($cbDB);
+$callback1 = $cb1['callback'];
+$button1 = array ("text" => $flag1, "callback_data" => $callback1);
+break;}
+if ($count === 1){$btn = [[$button1]];}
+elseif ($count === 2){$btn = [[$button1,$button2]];}
+elseif ($count === 3){$btn = [[$button1],[$button2,$button3]];}
+elseif ($count === 4){$btn = [[$button1,$button2],[$button3,$button4]];}
+elseif ($count === 5){$btn = [[$button1],[$button2,$button3],[$button4,$button5]];}
+$menu = json_encode(array("inline_keyboard" => $btn));
+sMsg($c, $cS.$sector.$wS, $menu);
+mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");}
+      break;
+case 'FAS':
+$fasDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE callback = '$data'");
+$fs = mysqli_fetch_assoc($fasDB);
+$fas = $fs['title'];
+$usDB = mysqli_query ($q, "SELECT * FROM users WHERE id = '$c'");
+$us = mysqli_fetch_assoc($usDB);
+list($tBot,$tMrcAll) = explode ('=', $us['temp']);
+list($tMrc,$tSec) = explode ('&', $tMrcAll);
+if (empty($us['temp']) OR $tBot !== $botID){
+sMsg($c, 'Данная сессия истекла. Начните новую покупку.', $menu);
+} else {
+$temp = $us['temp'].'&'.$d;
+$sec = mysqli_query ($q, "SELECT * FROM places WHERE sector = '$tSec'");
+$secSht = mysqli_fetch_assoc($sec);
+$short = $secSht['name'];
+$sec = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$short'");
+$sector = mysqli_fetch_assoc($sec);
+$LTCBTN = array ("text" => 'Litecoin [LTC]', "callback_data" => "PAYLTC");
+$menu = json_encode(array("inline_keyboard" => [[$LTCBTN]]));
+sMsg($c, $cS.$tMrc.'"'.PHP_EOL.'Фасовка: "'.$fas.'г"'.PHP_EOL.'Район: "'.$sector['title'].'"'.PHP_EOL.PHP_EOL.'Осталось выбрать подходящий вам способ оплаты:', $menu);
+mysqli_query
+($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");}
+break;
+      case 'PAY':
+         if ($d == 'LTC') {
+include ('../../../config/payment/litecoin.php');}
+$usDB = mysqli_query ($q, "SELECT * FROM users WHERE id = '$c'");
+$us = mysqli_fetch_assoc($usDB);
+list($tBot,$tMrcAll) = explode ('=', $us['temp']);
+list($tMrc,$tSec,$tFas) = explode ('&', $tMrcAll);
+if (empty($us['temp']) OR $tBot !== $botID){
+sMsg($c, 'Данная сессия истекла. Начните новую покупку.', $menu);
+} else {
+$bcb = 'FAS'.$tFas;
+$fasDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE callback = '$bcb'");
+$fs = mysqli_fetch_assoc($fasDB);
+$fas = $fs['title'];
+$mrcDB = mysqli_query ($q, "SELECT DISTINCT * FROM merches WHERE name = '$tMrc' AND seller  = '$type' AND sector = '$tSec' AND complectation = '$fas' LIMIT 1");$mrc = mysqli_fetch_assoc($mrcDB);
+$order = $mrc['id'];
+$pr = $mrc['price'];
+$price = round($pr / $cur, 5);
+$temp = $us['temp'].'&'.$d;
+$sec = mysqli_query ($q, "SELECT * FROM places WHERE sector = '$tSec'");
+$secSht = mysqli_fetch_assoc($sec);
+$short = $secSht['name'];
+$sec = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$short'");
+$sector = mysqli_fetch_assoc($sec);
+$pmDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE callback = '$data'");
+$pm = mysqli_fetch_assoc($pmDB);
+
+sMsg($c, $cS.$tMrc.'"'.PHP_EOL.'Фасовка: "'.$fas.'г"'.PHP_EOL.'Район: "'.$sector['title'].'"'.PHP_EOL.'Выбранный метод оплаты: "'.$pm['title'].'"'.PHP_EOL.PHP_EOL.'Для завершения покупки оплатите сумму:', $menu);
+sMsg($c, $price, $menu);
+sMsg($c, 'на следующий '.$pm['title'].' кошелек:', $menu);
+sMsg($c, $ltc, $menu);
+$menu = json_encode(array("inline_keyboard" => [[$PAYBTN],[$RFSBTN]]));
+sMsg($c, 'После оплаты нажмите кнопку "ПРОВЕРИТЬ ОПЛАТУ"', $menu);
+mysqli_query
+($q, "UPDATE users SET temp = '' WHERE id = '$c'");
+mysqli_query
+($q, "UPDATE merches SET status = '7', sold = NOW() WHERE id = '$order'");
+mysqli_query
+($q, "INSERT INTO orders (user,bot,merch,status) VALUES ('$c','$botID','$order','1')");}
+      break;
+   case 'ORD':
+if (str_contains ($message, 'ДA')){
+$result = mysqli_query ($q, "SELECT merch FROM orders WHERE bot = '$botID' AND user = '$c'");
+	 $mrc = mysqli_fetch_assoc($result);
+	$mrc = $mrc['merch'];
+	mysqli_query
+($q, "UPDATE orders SET status = '0' WHERE merch = '$mrc'");
+mysqli_query
+($q, "UPDATE merches SET status = '8' WHERE id = '$mrc'");
+mysqli_query
+($q, "UPDATE users SET temp = '' WHERE id = '$c'");
+	sMsg($c, 'Ваш заказ успешно отменен', $menu);}
+elseif (str_contains ($message, 'HET')){ 
+	dMsg($c, $message_id);
+	dMsg($c, $tPrm); 
+	mysqli_query
+($q, "UPDATE users SET temp = '' WHERE id = '$c'");
+} else {
+if ($d == 'NUL') {
+$text = $REFTXT;
+$menu = json_encode(array(
+	'resize_keyboard' => true,
+	'one_time_keyboard' => true,
+	'keyboard' => $yM));
+	} else {
+	$text = 'Оплата не обнаружена. Попробуйте снова через пару минут.';
+	$menu = json_encode(array("inline_keyboard" => [[$PAYBTN],[$RFSBTN]]));}
+      sMsg($c, $text, $menu);
+$temp = 'ORD='.$message_id_in;
+mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");}
+      break;
+case 'профиль':
+sMsg($c, $MYPTXT, $menu);break;
+case 'настройки':
+if ($bot['master'] == $c){
+if ($bot['switcher'] == '1'){$ttl = '🅱️ЫКЛЮЧИТЬ ';$cb = 'BTNOFF';$txt='БОТ ✅ ЗАПУЩЕН';} else {$ttl = 'ВКЛЮЧИТЬ❇️';$cb='BTNONN';$txt='БОТ ⛔️ ВЫКЛЮЧЕН';}
+$BTN = array ("text" => $ttl, "callback_data" => $cb);
+$menu = json_encode(array("inline_keyboard" => [[$BTN]]));}
+sMsg($c,$txt,$menu);
+
+break;
+
+case 'правила':
+$URLBTN = array ("text" => "ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ", "url" => "HTTPS://T.ME/RCODEX");
+$M = json_encode(array("inline_keyboard" => [[$URLBTN]]));
+sMsg($c, 'Внимательно ознакомьтесь с содержанием регламента магазина перед покупкой. Помните что магазин не несет ответственности за проблемы возникшие в связи с незнанием правил. Совершая покупку вы автоматически подтверждаете, что ознакомились с текстом данного документа:', $M);break;
+case 'BTN':
+switch ($d) {   
+case 'KOD':
+
+break;
+case 'XMP':
+sMsg($c, '01;01;ТОВАР #1;1;5[Данные товара #1 которые покупатель получит после оплаты в 5$]'.PHP_EOL.'01;02;ТОВАР #2;3;9[Данные товара #2 в количестве 3 штук в том же городе но в другом районе]'.PHP_EOL.'02;01;ТОВАР #1;2;10[Данные товара #1 но в количестве двух штук и в другом городе]'.PHP_EOL.'03;00;ТОВАР #1;1;5[Тот же самый товар, но в городе без указания районов]'.PHP_EOL.'01;00;ТОВАР #2;0;0[Будет создан шаблон товара #2 в котором будет указан город, остальные поля будут пропущены, товар в продажу не поступит]',$MrcM);
+break;
+case 'OFF':
+mysqli_query($q, "UPDATE bots SET switcher = '0' WHERE id = '$botID'");
+$ttl = 'ВКЛЮЧИТЬ❇️';$cb='BTNONN';$txt='БОТ ⛔️ ВЫКЛЮЧЕН';
+$BTN = array ("text" => $ttl, "callback_data" => $cb);
+$menu = json_encode(array("inline_keyboard" => [[$BTN]]));
+sMsg($c,$txt,$menu);
+break;
+case 'ONN':
+mysqli_query($q, "UPDATE bots SET switcher = '1' WHERE id = '$botID'");
+$ttl = '🅱️ЫКЛЮЧИТЬ ';$cb = 'BTNOFF';$txt='БОТ ✅ ЗАПУЩЕН';
+$BTN = array ("text" => $ttl, "callback_data" => $cb);
+$menu = json_encode(array("inline_keyboard" => [[$BTN]]));
+sMsg($c,$txt,$menu);
+break;
+case 'LSN':
+mysqli_query($q, "UPDATE extensions SET loc_saver = '1' WHERE id = '$botID'");
+$ttl = '🅱️ЫКЛЮЧИТЬ';$cb = 'BTNLSF';$txt='Функция сохранения города с последующим пропуском данного шага : ✅ВКЛЮЧЕНА';
+$BTN = array ("text" => $ttl, "callback_data" => $cb);
+$menu = json_encode(array("inline_keyboard" => [[$BTN]]));
+sMsg($c,$txt,$menu);
+break;
+case 'LSF':
+mysqli_query($q, "UPDATE extensions SET loc_saver = '1' WHERE id = '$botID'");
+$ttl = 'ВКЛЮЧИТЬ✅';$cb = 'BTNLSN';$txt='Функция сохранения города с последующим пропуском данного шага : ⛔️ВЫКЛЮЧЕНА';
+$BTN = array ("text" => $ttl, "callback_data" => $cb);
+$menu = json_encode(array("inline_keyboard" => [[$BTN]]));
+sMsg($c,$txt,$menu);
+break;
+}
+break;
+case 'пропустить':
+	if(strpos($uset['temp'], 'iH6=') !== false){ 
+	if(strpos($uset['temp'], 'info=') !== false){ 
+	list ($sub1,$sub2) = explode ('&', $user['temp']);
+	if ($sub2 == 'info='){
+	list ($sub3,$newB) = explode ('=',$sub1);
+	if ($sub3 == 'iH6'){
+	mysqli_query($q, "UPDATE users SET temp = '$newB' WHERE id = '$c'");
+	$menu = json_encode(array ("inline_keyboard" => $NBTK));
+	sMsg($c,'Выберите тип наиболее соответствующий вашему боту из списка вариантов ниже:',$menu);
+	}}}}
+	
+if ($bot['master'] == $c AND  $user['temp'] !== ''){
+	$temp = $user['temp'];
+	list($merch,$obj) = explode ('&',$temp);
+	list($new,$mrc) = explode ('=', $merch);
+	if ($obj == 'INFO='){
+	if ($new == 'NEW'){
+$temp = 'NEW='.$mrc.'&COMP=';
+mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");
+$txt = 'Введите комплектацию товара:';
+$menu = $PassM;
+	}}
+	if ($obj == 'COMP='){
+	if ($new == 'NEW'){
+mysqli_query($q, "UPDATE merches SET complectation = '1' WHERE id = '$mrc'");
+$temp = 'NEW='.$mrc.'&PRICE=';
+mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");
+$txt = 'Введите стоимость товара в долларах:';
+$menu = $PassM;
+	}}
+	if ($obj == 'PRICE='){
+	if ($new == 'NEW'){
+mysqli_query($q, "UPDATE merches SET status = '6' WHERE id = '$mrc'");
+mysqli_query($q, "UPDATE users SET temp = '' WHERE id = '$c'");
+$txt = 'Черновик успешно сохранен';
+$menu = $CPM;
+	}}}
+	sMsg($c,$txt,$menu);
+break;
+case 'контакты':
+break;
+	
+	default:
+	if(strpos($uset['temp'], 'iH6=') !== false){ 
+	if(strpos($uset['temp'], 'info=') !== false){ 
+	list ($sub1,$sub2) = explode ('&', $user['temp']);
+	if ($sub2 == 'info='){
+	list ($sub3,$newB) = explode ('=',$sub1);
+	if ($sub3 == 'iH6'){
+	mysqli_query($q, "UPDATE bots SET info = '$message' WHERE id = '$newB'");
+	$temp = 
+	mysqli_query($q, "UPDATE users SET temp = '$newB' WHERE id = '$c'");
+	$menu = json_encode(array ("inline_keyboard" => $NBTK));
+	sMsg($c,'Выберите тип наиболее соответствующий вашему боту из списка вариантов ниже:',$menu);
+	}}}}
+	
+	if ($bot['master'] == $c AND  $user['temp'] !== ''){
+	$temp = $user['temp'];
+	list($merch,$obj) = explode ('&',$temp);
+	list($new,$mrc) = explode ('=', $merch);
+	if ($obj == 'TITLE='){
+	if ($new == 'NEW'){
+mysqli_query($q, "UPDATE merches SET name = '$m' WHERE id = '$mrc'");
+$temp = 'NEW='.$mrc.'&INFO=';
+mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");
+$txt = 'Введите описание товара (необязательно, можно пропустить):';
+$menu = $PassM;
+	}}
+	if ($obj == 'INFO='){
+	if ($new == 'NEW'){
+mysqli_query($q, "UPDATE merches SET info = '$m' WHERE id = '$mrc'");
+$temp = 'NEW='.$mrc.'&COMP=';
+mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");
+$txt = 'Введите комплектацию товара:';
+$menu = $PassM;
+	}}
+	if ($obj == 'COMP='){
+	if ($new == 'NEW'){
+mysqli_query($q, "UPDATE merches SET complectation = '$m' WHERE id = '$mrc'");
+$temp = 'NEW='.$mrc.'&PRICE=';
+mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");
+$txt = 'Введите стоимость товара в долларах:';
+$menu = $PassM;
+	}}
+	if ($obj == 'PRICE='){
+	if ($new == 'NEW'){
+mysqli_query($q, "UPDATE merches SET price = '$m' WHERE id = '$mrc'");
+$temp = 'NEW='.$mrc.'&DATA=';
+mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");
+$txt = $ADDTXT;
+$menu = $PassM;
+	}}
+	} 
+	elseif($user['temp'] == 'iH6=BOT'){
+	$temp = 'iH6='.$message;
+	mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");
+	$txt = 'Теперь пришлите в ответном сообщении токен бота, которого вы желаете подключить к "iR0N H3ART", либо просто перешлите из диалога с @BotFather сообщение, содержащее этот токен';
+	$menu = $iHKM;
+	} else {
+	$txt = 'Команда недоступна на данный момент. Пожалуйста, попробуйте позже';}
+	sMsg($c,$txt,$menu);
+	break;}
+	
+} else {
+
+switch ($m) {
+case '/update':
+sleep(1);
+$menu = json_encode(array(
+	'resize_keyboard' => true,
+	'one_time_keyboard' => false,
+	'keyboard' => $GM));
+sMsg($c, 'Привет, чат!', $menu);
+sleep(1);
+$BTNTTL = '[💲💲💲]'.PHP_EOL.'$HADOW$ERVICE.$ITE';
+$URLBTN = array ("text" => $BTNTTL, "url" => "HTTPS://SHADOWSERVICE.SITE");
+$M = json_encode(array("inline_keyboard" => [[$URLBTN]]));
+sMsg($c, 'Я - бета версия бота-помощника от сервиса:', $M); 
+sleep(2);
+$URLBTN = array ("text" => "‶𝚒𝚁𝟶𝙽🫀𝙷𝟹𝙰𝚁𝚃 ᘜ″,", "url" => "HTTPS://iH.SHADOWSERVICE.SITE");
+$M = json_encode(array("inline_keyboard" => [[$URLBTN]]));
+sMsg($c, 'Я создан на движке', $M);
+$URLBTN = array ("text" => "🎱𝕚ℤ™︎ 𝙸𝚗𝚌. ᴛᴇᴄʜɴᴏʟᴏɢɪᴇs", "url" => "HTTPS://8iZ.SHADOWSERVICE.SITE");
+$M = json_encode(array("inline_keyboard" => [[$URLBTN]]));
+sMsg($c, 'разработанном с соблюдением прав пользователей на анонимность и конфиденциальность, официально опубликован в открытом доступе, с открытым исходным кодом, под стандартной лицензией "GNU GENERAL PUBLIC LICENSE"'.PHP_EOL.'Девелопинг и продакшн:', $M);
+break;
+}}
+
+//include ('../../../kernel/API/kit/extended.php');
+function sMsg($c, $text, $menu) {file_get_contents ($GLOBALS['api'] . '/sendMessage?chat_id=' . $c . '&text=' .urlencode($text) . '&reply_markup=' . $menu. '&parse_mode=html&disable_web_page_preview=true'); }
+//functionsaCbQ($callback_query_id, $text, $show_alert) {file_get_contents($GLOBALS['api'] . '/answerCallbackQuery?callback_query_id=' . $callback_query_id . '&text=' .urlencode($text). '&show_alert=' . $show_alert);}function editMessageText($chat_id_in, $message_id_in, $text, $menu) {file_get_contents($GLOBALS['api'] . '/editMessageText?chat_id='.$chat_id_in.'&message_id='.$message_id_in.'&text='.urlencode($text). '&reply_markup=' . $menu. '&parse_mode=html&disable_web_page_preview=true');}
+function dMsg($c, $mID) {file_get_contents ($GLOBALS['api'] . '/deleteMessage?chat_id='.$c.'&message_id='.$mID.'');}

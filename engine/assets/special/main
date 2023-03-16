@@ -1,0 +1,24 @@
+<?php 
+
+	$token = $botID.':'.$key;
+	$api = 'https://api.telegram.org/bot' . $token; 
+	$root = '../../';
+
+include ($root.'iH6/assets/special/KERNEL/RAM/BASIC.php');
+include ($root.'iH6/assets/special/KERNEL/API/BASIC.php');
+include ($root.'iH6/assets/special/KERNEL/CPU/LOADING.php');
+include ($root.'iH6/assets/special/KERNEL/CPU/FIREWALL.php');
+include ($root.'iH6/assets/special/LIBRARY/KEYBOARD.php');
+include ($root.'iH6/assets/special/KERNEL/CPU/VERIFICATION.php');
+include ($root.'iH6/assets/special/KERNEL/GUI/CONTROLLER.php');
+
+include ($root.'iH6/assets/special/KERNEL/AI/HELLO.php');
+//include ($root.'iH6/assets/special/KERNEL/HKEY/Q.php');
+	$DIRX = $root.'iH6/assets/special/ADDON/';
+include ($root.'iH6/assets/special/INTEL.php');
+
+
+
+
+
+?>

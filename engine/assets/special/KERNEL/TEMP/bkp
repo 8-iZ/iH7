@@ -1,0 +1,144 @@
+  case 'SQL':
+include ($DIRX.'DBBOT/SQL.php'); 
+		 break;
+	case 'iH6':
+include ($DIRX.'iHBOT/NEW.php');
+    	 break;
+   case '⏺ Черновик':
+        mysqli_query($q, "UPDATE users SET temp = '' WHERE id = '$c'");
+        sMsg($c,'Товар был сохранен, но в продажу он не поступит пока вы не введете отсутствующие данные и не подтвердите его добавление',$CPM);
+		 break;
+		case '↪️ Заново':
+       break;
+	case 'продажи': 
+	    $result = mysqli_query ($q, "SELECT id FROM orders WHERE bot = '$botID' AND status = '1'"); 
+	    while($order = mysqli_fetch_row($result)) {
+            $orderID = $order[0];
+        $result2 = mysqli_query ($q, "SELECT * FROM orders WHERE id = '$orderID'"); 
+            $oData = mysqli_fetch_row($result2);}
+            
+	    break;
+	case 'пакетное'.PHP_EOL.'добавление':
+	        mysqli_query($q, "UPDATE users SET temp = 'NEW=PAK' WHERE id = '$c'");
+	    $kodBtn = array ("text" => "КОДЫ ЛОКАЦИЙ", "callback_data" => "BTNKOD");
+    	$xmpBtn = array ("text" => "ПРИМЕР ЗАПРОСА", "callback_data" => "BTNXMP");
+        	$menu = json_encode(array ("inline_keyboard" => [[$kodBtn,$xmpBtn]]));
+        sMsg($c,'Пришлите ответным сообщением или прикрепите файлом текст, содержащий не менее 5 данных товаров, каждый из которых должен быть обозначен в новой строке и заключен в квадратные скобки <[]>, перед которыми следует указать следующие характеристики через точку с запятой <;>: код города; код района; наименование; комплектация; цена в <$> (без указания значка валюты). Коды городов, районов и пример правильного оформления данных можно посмотреть ниже',$menu);
+    	 break;
+	case 'курьеры':
+    	 break;
+	case 'BTN':
+include ($DIRX.'REBTN/FULL.php');
+    	 break;
+	case 'CONTROL PANEL: 🟢N':
+        sMsg($c,'Панель управления отключена', $CPoffM);
+	    break;
+	case 'CONTROL PANEL: 🔴FF':
+        sMsg($c,'Панель управления влючена', $CPM);
+	    break;
+	
+	case 'ORS':
+include ($DIRX.'SELER/ORS.php');
+       break;
+   case 'SEL':
+include ($DIRX.'SELER/SEL.php');
+       break;
+   case 'SEC':
+include ($DIRX.'SELER/SEC.php');
+   	 break;
+	case 'FAS':
+include ($DIRX.'SELER/FAS.php');
+		 break;
+   case 'PAY':
+       if ($d == 'LTC') {
+include ('../../../config/payment/litecoin.php');}
+$usDB = mysqli_query ($q, "SELECT * FROM users WHERE id = '$c'");
+$us = mysqli_fetch_assoc($usDB);
+list($tBot,$tMrcAll) = explode ('=', $us['temp']);
+list($tMrc,$tSec,$tFas) = explode ('&', $tMrcAll);
+if (empty($us['temp']) OR $tBot !== $botID){
+sMsg($c, 'Данная сессия истекла. Начните новую покупку.', $menu);
+} else {
+$bcb = 'FAS'.$tFas;
+$fasDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE callback = '$bcb'");
+$fs = mysqli_fetch_assoc($fasDB);
+$fas = $fs['title'];
+$mrcDB = mysqli_query ($q, "SELECT DISTINCT * FROM merches WHERE name = '$tMrc' AND seller  = '$type' AND sector = '$tSec' AND complectation = '$fas' LIMIT 1");$mrc = mysqli_fetch_assoc($mrcDB);
+$order = $mrc['id'];
+$pr = $mrc['price'];
+$price = round($pr / $cur, 5);
+$temp = $us['temp'].'&'.$d;
+$sec = mysqli_query ($q, "SELECT * FROM places WHERE sector = '$tSec'");
+$secSht = mysqli_fetch_assoc($sec);
+$short = $secSht['name'];
+$sec = mysqli_query ($q, "SELECT * FROM callbacks WHERE short = '$short'");
+$sector = mysqli_fetch_assoc($sec);
+$pmDB = mysqli_query ($q, "SELECT * FROM callbacks WHERE callback = '$data'");
+$pm = mysqli_fetch_assoc($pmDB);
+$menu = json_encode(array("inline_keyboard" => [[$PAYBTN],[$RFSBTN]]));
+sMsg($c, '<b>'.$cS.$tMrc.'"</b>'.PHP_EOL.'<b>Фасовка:</b> "'.$fas.'г"'.PHP_EOL.'<b>Район:</b> "'.$sector['title'].'"'.PHP_EOL.'Выбранный метод оплаты: <b>"'.$pm['title'].'"</b>'.PHP_EOL.PHP_EOL.'Для завершения покупки оплатите сумму:'.PHP_EOL.PHP_EOL.'<code>'.$price.'</code>'.PHP_EOL.PHP_EOL.'на следующий '.$pm['title'].' кошелек:'.PHP_EOL.PHP_EOL.'<code>'.$ltc.'</code>'.PHP_EOL.PHP_EOL.'После оплаты нажмите кнопку "ПРОВЕРИТЬ ОПЛАТУ"', $menu);
+mysqli_query
+($q, "UPDATE users SET temp = '' WHERE id = '$c'");
+mysqli_query
+($q, "UPDATE merches SET status = '7', sold = NOW() WHERE id = '$order'");
+mysqli_query
+($q, "INSERT INTO orders (user,bot,merch,status) VALUES ('$c','$botID','$order','1')");}
+      break;
+   case 'ORD':
+if (str_contains ($message, 'ДA')){
+$result = mysqli_query ($q, "SELECT merch FROM orders WHERE bot = '$botID' AND user = '$c'");
+	 $mrc = mysqli_fetch_assoc($result);
+	$mrc = $mrc['merch'];
+	mysqli_query
+($q, "UPDATE orders SET status = '0' WHERE merch = '$mrc'");
+mysqli_query
+($q, "UPDATE merches SET status = '8' WHERE id = '$mrc'");
+mysqli_query
+($q, "UPDATE users SET temp = '' WHERE id = '$c'");
+	sMsg($c, 'Ваш заказ успешно отменен', $menu);}
+elseif (str_contains ($message, 'HET')){ 
+	dMsg($c, $message_id);
+	dMsg($c, $tPrm); 
+	mysqli_query
+($q, "UPDATE users SET temp = '' WHERE id = '$c'");
+} else {
+if ($d == 'NUL') {
+$text = $REFTXT;
+$menu = json_encode(array(
+	'resize_keyboard' => true,
+	'one_time_keyboard' => true,
+	'keyboard' => $yM));
+	} else {
+	$text = 'Оплата не обнаружена. Попробуйте снова через пару минут.';
+	$menu = json_encode(array("inline_keyboard" => [[$PAYBTN],[$RFSBTN]]));}
+      sMsg($c, $text, $menu);
+$temp = 'ORD='.$message_id_in;
+mysqli_query($q, "UPDATE users SET temp = '$temp' WHERE id = '$c'");}
+      break;
+	case 'PROFILE':
+sMsg($c, $MYPTXT, $menu);
+		break;
+	case 'SETTINGS':
+include ($DIRX.'ADMIN/SET.php');
+      break;
+	case 'расширения':
+if ($type == 'L'){
+sMsg($c,'НАСТРОЙКИ СПОСОБОВ ПРИЕМА СРЕДСТВ',$menu);
+sMsg($c,'НАСТРОЙКИ ДОСТУПНЫХ СПОСОБОВ ВЫВОДА',$menu);}
+			break;
+   case 'правила':
+        $URLBTN = array ("text" => "ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ", "url" => "HTTPS://T.ME/RCODEX");
+            $M = json_encode(array("inline_keyboard" => [[$URLBTN]]));
+        sMsg($c, 'Внимательно ознакомьтесь с содержанием регламента магазина перед покупкой. Помните что магазин не несет ответственности за проблемы возникшие в связи с незнанием правил. Совершая покупку вы автоматически подтверждаете, что ознакомились с текстом данного документа:', $M);
+        break;
+   case 'NEXT':
+include ($DIRX.'FORMS/NEXT.php');
+        break;
+   case 'контакты':
+        break;
+   case 'PUB':
+include ($DIRX.'GROUP/PUB.php');
+        break;
+	default:
+    include ($root.'iH6/assets/special/KERNEL/CPU/SENSORS.php');
+	   break;

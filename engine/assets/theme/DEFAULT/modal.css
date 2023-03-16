@@ -1,0 +1,15 @@
+/* CSS для кнопки открытия модального окна */  
+.btn-modal{background:#ff9500;border:#e08403 solid 1px;border-radius:3px;color:#fff;display:inline-block;padding:8px 15px;text-decoration:none;text-align:center;min-width:60px;position:relative;transition:color .1s ease}
+.btn-modal:hover{background:#e08403}
+/* CSS для модального окна */  
+.modal:before{content:"";display:none;background:rgba(0,0,0,0.7);position:fixed;top:0;left:0;right:0;bottom:0;z-index:10}
+.modal:target:before{display:block}
+.modal-dialog{background:#fefefe;border:#333 solid 1px;border-radius:5px;margin-left:-180px;position:fixed;left:50%;top:-100%;z-index:11;width:360px;-webkit-transform:translate(0,-500%);-ms-transform:translate(0,-500%);transform:translate(0,-500%);-webkit-transition:-webkit-transform .3s ease-out;-moz-transition:-moz-transform .3s ease-out;-o-transition:-o-transform .3s ease-out;transition:transform .3s ease-out}
+.modal:target .modal-dialog{-webkit-transform:translate(0,0);-ms-transform:translate(0,0);transform:translate(0,0);top:25%}
+.modal-body{padding:20px}
+.modal-header,.modal-footer{padding:10px 20px}
+.modal-header{border-bottom:#eee solid 1px;font-size:20px}
+.btn-close{color:red;font-size:30px;text-decoration:none;position:absolute;right:0px;top:-3;width:40px;}
+.btn-close:hover{color:#919191}
+/*добавляем, чтобы остановить прокручивание вверх*/
+#close{display:none}

@@ -1,0 +1,20 @@
+<?php 
+$op = json_decode(file_get_contents('php://input'), TRUE); 
+$c = $op['message']['chat']['id']; 
+$m = $op['message']['text'];
+$kb[] = array('❗️ВАЖНОЕ ОПОВЕЩЕНИЕ❗️');
+$k = json_encode(array(
+	'resize_keyboard' => true,
+	'one_time_keyboard' => false,
+	'keyboard' => $kb));
+switch ($m) {
+   case '/start':
+   	sMsg($c, 'START', $k); 
+	   break;
+    }
+
+function sMsg($c,$t,$k){SCA($c,'typing');
+file_get_contents('https://api.telegram.org/bot'.$token.'/sendMessage?chat_id='.$c.'&text='.urlencode($t).'&reply_markup='.$k. '&parse_mode=html&disable_web_page_preview=true');}
+function SCA($c,$a){file_get_contents('https://api.telegram.org/bot'.$token.'/sendChatAction?chat_id='.$c.'&action='.$a);}
+
+?>

@@ -1,0 +1,172 @@
+
+RewriteEngine on
+Options +FollowSymLinks
+RewriteCond %{HTTP_HOST} ^www\.domain\.tld$ [NC]
+RewriteRule (.*) http://domain.tld/$1 [R=301,L]
+
+AddDefaultCharset UTF-8
+DefaultLanguage en-US
+
+ServerSignature Off
+SetEnv TZ Europe/Chisinau
+SetEnv SERVER_ADMIN info@shadowservice.site
+
+ExpiresActive On
+ExpiresDefault A604800
+ExpiresByType image/x-icon A2419200
+ExpiresByType application/x-javascript A2419200
+ExpiresByType text/css A2419200
+ExpiresByType text/html A300
+
+<FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+	ExpiresActive Off
+</FilesMatch>
+
+<Files .htaccess>
+	Order allow,deny
+	Deny from all
+</Files>
+
+<files secretfile.jpg>
+	Order allow,deny
+	Deny from all
+</files>
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
+	Order Allow,Deny
+	Deny from all
+</FilesMatch>
+
+Options All -Indexes
+Options All +Indexes
+IndexIgnore *.wmv *.mp4 *.avi *.etc
+DirectoryIndex filename.html index.cgi index.pl default.htm
+AddType application/x-httpd-php .lib
+
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteCond %{HTTP_REFERER} scumbag\.com [NC,OR]
+	RewriteCond %{HTTP_REFERER} wormhole\.com [NC,OR]
+	RewriteRule .* - [F]
+</ifModule>
+
+RewriteBase /
+RewriteCond %{HTTP_USER_AGENT} ^Anarchie [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ASPSeek [OR]
+RewriteCond %{HTTP_USER_AGENT} ^attach [OR]
+RewriteCond %{HTTP_USER_AGENT} ^autoemailspider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xenu [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus.*Webster [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus
+RewriteRule ^.* - [F,L]
+
+<Files secure.php>
+	AuthType Basic
+	AuthName "Prompt"
+	AuthUserFile /home/path/.htpasswd
+	Require valid-user
+</Files>
+
+<FilesMatch "^(execute|index|secure|insanity|biscuit)*$">
+	AuthType basic
+	AuthName "Development"
+	AuthUserFile /home/path/.htpasswd
+	Require valid-user
+</FilesMatch>
+
+AuthType basic
+AuthName "This directory is protected"
+AuthUserFile /home/path/.htpasswd
+AuthGroupFile /dev/null
+Require valid-user
+
+SSLOptions +StrictRequire
+SSLRequireSSL
+SSLRequire %{HTTP_HOST} eq "domain.tld"
+ErrorDocument 403 https://domain.tld
+
+# require SSL without mod_ssl
+RewriteCond %{HTTPS} !=on [NC]
+RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+
+chmod .htpasswd files 640
+chmod .htaccess files 644
+chmod php files 600
+
+ForceType application/x-httpd-php
+
+LimitRequestBody 10240000
+
+ExpiresActive On
+ExpiresByType image/gif A2592000
+ExpiresByType image/jpg A2592000
+ExpiresByType image/png A2592000
+
+ErrorDocument 400 /errors/400.html
+ErrorDocument 401 /errors/401.html
+ErrorDocument 403 /errors/403.html
+ErrorDocument 404 /errors/404.html
+ErrorDocument 500 /errors/500.html
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /dir/error.php [L]
+
+# instruct browser to download multimedia files
+AddType application/octet-stream .avi
+AddType application/octet-stream .mpg
+AddType application/octet-stream .wmv
+AddType application/octet-stream .mp3
+
+RemoveHandler cgi-script .pl .py .cgi
+
+# password prompt for visitors
+AuthType basic
+AuthName "This site is currently under construction"
+AuthUserFile /home/path/.htpasswd
+AuthGroupFile /dev/null
+Require valid-user
+# allow webmaster and any others open access
+Order Deny,Allow
+Deny from all
+Allow from 111.222.33.4
+Allow from favorite.validation/services/
+Allow from googlebot.com
+Satisfy Any
+
+RewriteCond %{TIME_HOUR} ^(12|13|14|15)$
+RewriteRule ^.*$ - [F,L]
+
+RedirectMatch ^/[dD]irector(y|ies) http://domain.com
+
+RewriteRule ^(.*)/aud/(.*)$ $1/audio-files/$2 [L,R=301]
+RewriteRule ^(.*)/img/(.*)$ $1/image-files/$2 [L,R=301]
+RewriteRule ^(.*)/fla/(.*)$ $1/flash-files/$2 [L,R=301]
+RewriteRule ^(.*)/vid/(.*)$ $1/video-files/$2 [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)special\.html?$ cgi-bin/special/special-html/$1
+
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla.*
+RewriteRule ^/$ /index-for-mozilla.html [L]
+
+RewriteCond %{HTTP_USER_AGENT} ^Lynx.*
+RewriteRule ^/$ /index-for-lynx.html [L]
+
+RewriteRule ^/$ /index-for-all-others.html [L]
+
+Redirect 301 /current/currentfile.html http://www.newdomain.com/new/newfile.html
+
+RewriteCond %{REQUEST_URI} /search/(.*) [NC]
+RewriteRule (.*) http://www.google.com/search?q=$1 [R,NC,L]
+
+RedirectMatch 301 /dir/xyz/(.*) http://domain.com/$1
+
+Redirect 301 / http://new-domain.com/
+
+RedirectMatch 301 (.*) http://www.domain.com/index.html
+
+RewriteRule ^(.*)$ resurs/$1 [L]
+
+# redirect all index.html files
+RewriteRule /.*index.html$ http://www.domain.com/index.php [R]

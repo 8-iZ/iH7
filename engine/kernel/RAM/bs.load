@@ -1,0 +1,5 @@
+<?php 
+
+$lib = 'library/basic.lib';
+
+?>
